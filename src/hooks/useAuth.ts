@@ -58,8 +58,8 @@ export function useAuth() {
         setAuthState({
           user,
           loading: false,
-          error: null
-        })
+            error: null
+          })
       } catch (err) {
         console.error('認証初期化エラー:', err)
         setAuthState({
@@ -76,13 +76,13 @@ export function useAuth() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         console.log('認証状態変更:', event)
-        
-        setAuthState({
+
+          setAuthState({
           user: session?.user || null,
-          loading: false,
-          error: null
-        })
-      }
+            loading: false,
+            error: null
+          })
+        }
     )
 
     return () => {

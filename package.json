@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test": "echo \"Test script coming soon\" && exit 0"
   },
   "dependencies": {
     "@supabase/auth-ui-react": "^0.4.7",
