@@ -6,7 +6,6 @@ import { createBrowserSupabaseClient } from '@/lib/supabase'
 import type { Database } from '@/lib/supabase'
 
 // 🎯 型定義の威力を体験！
-type User = Database['public']['Tables']['users']['Row']
 type AuthError = {
   message: string
   details?: string

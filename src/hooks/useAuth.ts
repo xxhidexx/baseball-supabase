@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { User } from '@supabase/supabase-js'
 import { createBrowserSupabaseClient } from '@/lib/supabase'
-import type { Database } from '@/lib/supabase'
 
 // 🔥 基本的な認証状態管理
 type AuthState = {
@@ -58,8 +57,8 @@ export function useAuth() {
         setAuthState({
           user,
           loading: false,
-            error: null
-          })
+          error: null
+        })
       } catch (err) {
         console.error('認証初期化エラー:', err)
         setAuthState({
@@ -77,12 +76,12 @@ export function useAuth() {
       (event, session) => {
         console.log('認証状態変更:', event)
 
-          setAuthState({
+        setAuthState({
           user: session?.user || null,
-            loading: false,
-            error: null
-          })
-        }
+          loading: false,
+          error: null
+        })
+      }
     )
 
     return () => {
@@ -145,4 +144,4 @@ export function useAuth() {
     // 🔧 開発用
     isDevelopmentMode: isDevelopmentMode(),
   }
-} 
+}

@@ -16,7 +16,7 @@ export default function PlayersPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [positionFilter, setPositionFilter] = useState('')
   
-  const { isAuthenticated, loading: authLoading, userId } = useAuth()
+  const { isAuthenticated, loading: authLoading } = useAuth()
   const supabase = createBrowserSupabaseClient()
   
   // 認証状態を安定した値として取得
