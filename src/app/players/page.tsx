@@ -1,26 +1,38 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, Suspense } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { createBrowserSupabaseClient } from '@/lib/supabase'
 import type { Database } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 
-// 🔥 型定義の威力: Player型の自動生成
+// 🔥 型定義の威力: データベースの型安全性
 type Player = Database['public']['Tables']['players']['Row']
 
-export default function PlayersPage() {
+function PlayersContent() {
   const [players, setPlayers] = useState<Player[]>([])
   const [loading, setLoading] = useState(false)  // 初期状態はfalseに変更
   const [error, setError] = useState<string | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
   const [positionFilter, setPositionFilter] = useState('')
+  const [showDeleteSuccess, setShowDeleteSuccess] = useState(false)
   
   const { isAuthenticated, loading: authLoading } = useAuth()
+  const searchParams = useSearchParams()
   const supabase = createBrowserSupabaseClient()
   
   // 認証状態を安定した値として取得
   const isAuth = isAuthenticated()
+
+  // URLパラメータから削除成功を確認
+  useEffect(() => {
+    if (searchParams.get('deleted') === 'true') {
+      setShowDeleteSuccess(true)
+      // 3秒後に非表示
+      setTimeout(() => setShowDeleteSuccess(false), 3000)
+    }
+  }, [searchParams])
 
   // 🔥 型定義の威力: フィルター処理の型安全性
   const filteredPlayers = useMemo(() => {
@@ -174,6 +186,15 @@ export default function PlayersPage() {
           </div>
         </div>
 
+        {/* 削除成功通知 */}
+        {showDeleteSuccess && (
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
+            <div className="text-green-800">
+              <strong>✅ 削除完了:</strong> 選手が正常に削除されました
+            </div>
+          </div>
+        )}
+
         {/* エラー表示 */}
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
@@ -264,5 +285,20 @@ export default function PlayersPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function PlayersPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+          <p className="mt-4 text-gray-600">ページを読み込み中...</p>
+        </div>
+      </div>
+    }>
+      <PlayersContent />
+    </Suspense>
   )
 } 
