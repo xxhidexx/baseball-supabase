@@ -1,0 +1,81 @@
+name: ✨ 機能追加リクエスト
+description: 新しい機能や改善案を提案してください
+title: "[FEATURE] "
+labels: ["enhancement", "triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🎯 機能追加リクエスト
+        新しい機能や改善案をお聞かせください！
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: 📋 機能の説明
+      description: 追加したい機能について詳しく説明してください
+      placeholder: |
+        例：選手の詳細ページを作成し、成績データをグラフで表示したい
+      value: ""
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: 🎯 動機・背景
+      description: なぜこの機能が必要なのか教えてください
+      placeholder: |
+        例：現在の一覧ページでは詳細な情報が見られず、選手の成績推移が分からない
+      value: ""
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: 💡 提案する解決策
+      description: どのように実装すべきか、アイデアがあれば教えてください
+      placeholder: |
+        例：
+        - 選手詳細ページ (/players/[id]) を作成
+        - Chart.jsを使って成績グラフを表示
+        - 編集・削除ボタンの追加
+      value: ""
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 🔥 優先度
+      description: この機能の重要度はどの程度ですか？
+      options:
+        - 🔴 高 (すぐに必要)
+        - 🟡 中 (時間があるときに)
+        - 🟢 低 (あったら便利)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: complexity
+    attributes:
+      label: ⚡ 実装難易度（予想）
+      description: 実装の複雑さはどの程度だと思いますか？
+      options:
+        - 🟢 簡単 (数時間)
+        - 🟡 普通 (1-2日)
+        - 🔴 複雑 (1週間以上)
+        - ❓ 不明
+
+  - type: checkboxes
+    id: related-features
+    attributes:
+      label: 🔗 関連する技術要素
+      description: この機能に関わる技術要素をチェックしてください
+      options:
+        - label: TypeScript型定義
+        - label: Supabaseデータベース
+        - label: Next.js 15機能
+        - label: 認証機能
+        - label: UI/UXデザイン
+        - label: テスト実装

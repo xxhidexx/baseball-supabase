@@ -1,0 +1,94 @@
+name: 🐛 バグレポート
+description: バグや問題を報告してください
+title: "[BUG] "
+labels: ["bug", "triage"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🐛 バグレポート
+        問題の詳細を教えてください。再現可能な情報があると解決が早くなります！
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: 🔍 バグの説明
+      description: 何が起こっているか詳しく説明してください
+      placeholder: |
+        例：選手追加フォームで「登録」ボタンを押しても反応しない
+      value: ""
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: 🔄 再現手順
+      description: バグを再現するための手順を教えてください
+      placeholder: |
+        1. ログインページでadmin@example.comでログイン
+        2. 「選手を追加」ボタンをクリック
+        3. 全ての必須項目を入力
+        4. 「選手を登録」ボタンをクリック
+        5. 何も起こらない
+      value: |
+        1. 
+        2. 
+        3. 
+        4. 
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: ✅ 期待される動作
+      description: 本来どのような動作をするべきですか？
+      placeholder: |
+        例：選手が正常に登録され、選手一覧ページにリダイレクトされる
+      value: ""
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: ❌ 実際の動作
+      description: 実際には何が起こりましたか？
+      placeholder: |
+        例：ボタンを押してもローディング表示にならず、ページも変わらない
+      value: ""
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 重要度
+      description: このバグの影響はどの程度ですか？
+      options:
+        - 🔴 致命的 (アプリが使用不可)
+        - 🟡 重要 (主要機能に影響)
+        - 🟢 軽微 (一部機能に影響)
+        - 🔵 提案 (改善の余地)
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 🖥️ 環境情報
+      description: バグが発生した環境を教えてください
+      placeholder: |
+        - OS: macOS Sonoma 14.0
+        - ブラウザ: Chrome 120.0
+        - Node.js: v20.10.0
+        - 画面サイズ: Desktop (1920x1080)
+      value: |
+        - OS: 
+        - ブラウザ: 
+        - Node.js: 
+        - 画面サイズ: 
+    validations:
+      required: true
